@@ -120,6 +120,10 @@ def pretty(tokens, max_str=120):
     return "\n".join(lines)
 
 if __name__ == "__main__":
+    import os
     import sys
-    s = open(sys.argv[1], encoding="latin-1").read()
+    in_path = os.path.realpath(sys.argv[1])
+    if not os.path.isfile(in_path):
+        sys.exit("lexer.py: no such file: %s" % sys.argv[1])
+    s = open(in_path, encoding="latin-1").read()
     sys.stdout.write(pretty(tokenize(s), int(sys.argv[2]) if len(sys.argv) > 2 else 120))
